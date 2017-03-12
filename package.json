@@ -1,0 +1,15 @@
+{
+  "name": "rfib-node-reader",
+  "version": "1.0.0",
+  "description": "Simple implemantation to RFIB Reader",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "João Marcus Fernandes <jmarcusfernandes@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "fs-extra": "^2.0.0",
+    "socket.io": "^1.7.3"
+  }
+}
