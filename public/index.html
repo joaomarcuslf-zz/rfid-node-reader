@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pr">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7", crossorigin="anonymous" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container text-center">
+      <h1 id="textMessage"> Trying to connect </h1>
+
+      <input id="rfib" onChange="read()" type="text" disabled="disabled" />
+
+			<div id="resultContainer"></div>
+    </div>
+
+    <script src="http://localhost:8000/socket.io/socket.io.js"></script>
+    <script>
+      try {
+          const socket = io("http://localhost:8000/");
+
+          socket.emit("open");
+
+          document.getElementById("rfib").disabled = false;
+
+          function read() {
+						const lastResult = document.getElementById("approvedResponse");
+						if(lastResult)
+							lastResult.remove();
+
+            socket.emit("data", document.getElementById("rfib").value);
+						document.getElementById("rfib").disabled = true;
+          }
+
+          socket.on("response", function({status, message}) {
+						switch (status) {
+							case "approved":
+								const approvedResponse = document.createElement('div');
+								approvedResponse.id = "approvedResponse";
+								approvedResponse.className = 'jumbotron container';
+
+								const name = document.createElement('h2');
+								name.innerHTML = "Name: " + message.name;
+
+								approvedResponse.appendChild(name);
+
+								const birthDate = document.createElement('h3');
+								birthDate.innerHTML = "Birthdate: " + message.birthDate;
+
+								approvedResponse.appendChild(birthDate);
+
+								const email = document.createElement('h3');
+								email.innerHTML = "E-mail: " + message.email;
+
+								approvedResponse.appendChild(email);
+
+								document
+									.getElementById('resultContainer')
+									.appendChild(approvedResponse);
+
+								message = 'Approved';
+							case "warning":
+							case "denied":
+							default:
+								document.getElementById("textMessage").innerHTML = message;
+								document.getElementById("rfib").value = "";
+								document.getElementById("rfib").disabled = false;
+								break;
+						}
+          });
+        } catch(ex) {
+          document.getElementById("textMessage").innerHTML = "Connection Refused";
+        }
+      </script>
+  </body>
+</html>

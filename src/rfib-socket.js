@@ -32,7 +32,7 @@ io.on('connection', (client) => {
     const user = REGISTERED_IDS[id];
 
     if (user) {
-      client.emit('response', createResponse('asciipprove', user));
+      client.emit('response', createResponse('approved', user));
       console.log(`Result for ${id}: Approved`);
     } else {
     client.emit('response', createResponse('denied', 'User not found'));
