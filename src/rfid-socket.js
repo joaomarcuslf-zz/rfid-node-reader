@@ -1,8 +1,8 @@
 const server = require('http').createServer();
 const io = require('socket.io')(server);
-const fs = require('fs-extra');
+const { readJSONSync } = require('fs-extra');
 
-const REGISTERED_IDS = fs.readJSONSync('./db/users.json');
+const REGISTERED_IDS = readJSONSync('./db/users.json');
 
 const createResponse = (status, message) => {
   return {

@@ -1,14 +1,14 @@
-const readline = require('readline');
+const { createInterface } = require('readline');
 const HOST = '0.0.0.0';
 const PORT = 8000;
 const address = `http://${HOST}:${PORT}/`;
 
-var rl = readline.createInterface({
+const rl = createInterface({
   input: process.stdin,
   output: process.stdout
 });
 
-require('./src/rfib-socket')(HOST, PORT);
+require('./src/rfid-socket')(HOST, PORT);
 const io = require('socket.io-client');
 
 const client = io.connect(address);

@@ -10,7 +10,7 @@
     <div class="container text-center">
       <h1 id="textMessage"> Trying to connect </h1>
 
-      <input id="rfib" onChange="read()" type="text" disabled="disabled" />
+      <input id="rfid" onChange="read()" type="text" disabled="disabled" />
 
 			<div id="resultContainer"></div>
     </div>
@@ -22,15 +22,15 @@
 
           socket.emit("open");
 
-          document.getElementById("rfib").disabled = false;
+          document.getElementById("rfid").disabled = false;
 
           function read() {
 						const lastResult = document.getElementById("approvedResponse");
 						if(lastResult)
 							lastResult.remove();
 
-            socket.emit("data", document.getElementById("rfib").value);
-						document.getElementById("rfib").disabled = true;
+            socket.emit("data", document.getElementById("rfid").value);
+						document.getElementById("rfid").disabled = true;
           }
 
           socket.on("response", function({status, message}) {
@@ -64,8 +64,8 @@
 							case "denied":
 							default:
 								document.getElementById("textMessage").innerHTML = message;
-								document.getElementById("rfib").value = "";
-								document.getElementById("rfib").disabled = false;
+								document.getElementById("rfid").value = "";
+								document.getElementById("rfid").disabled = false;
 								break;
 						}
           });

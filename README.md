@@ -1,11 +1,11 @@
-# RFIB-Node-Reader
+# RFID-Node-Reader
 
-Simple implemantation to RFIB Reader using Raspberry PI as a server.
+Simple implemantation to RFID Reader using Raspberry PI as a server.
 
 ## Hardware
 
 - Raspberry PI 3 Model B
-- RFIB Usb Reader
+- RFID Usb Reader
 
 ## Dependencies
 
@@ -15,10 +15,10 @@ Simple implemantation to RFIB Reader using Raspberry PI as a server.
 
 - CLI Version:
 ```
-  $ node rfib-cli.js
+  $ node rfid-cli.js
 ```
 
 - UI Version:
 ```
-  $ node rfib-app.js
+  $ node rfid-app.js
 ```
